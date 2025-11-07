@@ -35,6 +35,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     username: username,
                     password: password
@@ -62,6 +63,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include'
         });
         console.log(response)
 
