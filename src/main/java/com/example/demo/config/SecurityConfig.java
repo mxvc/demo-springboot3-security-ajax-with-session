@@ -27,10 +27,10 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-        http.formLogin(cfg->cfg.defaultSuccessUrl("/msg"));
+        http.formLogin(cfg->cfg.defaultSuccessUrl("/hello"));
 
         http.sessionManagement(cfg->{
-            cfg.maximumSessions(1);
+            cfg.maximumSessions(1).maxSessionsPreventsLogin(true);
         });
 
         return http.build();

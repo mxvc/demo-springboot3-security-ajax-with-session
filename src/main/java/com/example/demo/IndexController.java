@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IndexController {
 
 
-    @RequestMapping("/msg")
+    @RequestMapping("/hello")
     public String msg(HttpSession session, Authentication auth){
         String id = session.getId();
         System.out.println(id);
