@@ -105,12 +105,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
-    // 显式定义这个 Bean，以便可以在 Controller 中注入。
-    // 它负责将 SecurityContext 存入/取出 HttpSession。
-    @Bean
-    public SecurityContextRepository securityContextRepository() {
-        return new HttpSessionSecurityContextRepository();
-    }
+
 
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
