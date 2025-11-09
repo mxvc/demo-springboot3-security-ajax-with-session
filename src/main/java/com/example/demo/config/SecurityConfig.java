@@ -33,7 +33,6 @@ public class SecurityConfig {
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        // 这是 Spring Boot 3 推荐的方式来获取 AuthenticationManager
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -58,7 +57,7 @@ public class SecurityConfig {
                             PrintWriter writer = response.getWriter();
                             Map<String, Object> result = new HashMap<>();
                             result.put("code", HttpStatus.UNAUTHORIZED.value());
-                            result.put("msg", "未登录或会话过期");
+                            result.put("msg", "exception:" + authException.getMessage());
                             writer.write(objectMapper.writeValueAsString(result));
                         })
                 )
@@ -92,8 +91,8 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode("password")) // 密码是 "password"
+                .username("admin")
+                .password(passwordEncoder.encode("123456")) // 密码是 "password"
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
