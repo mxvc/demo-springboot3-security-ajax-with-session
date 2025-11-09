@@ -84,6 +84,7 @@ public class SecurityConfig {
             cfg.maximumSessions(1).maxSessionsPreventsLogin(true);
         });
 
+
         return http.build();
     }
 
