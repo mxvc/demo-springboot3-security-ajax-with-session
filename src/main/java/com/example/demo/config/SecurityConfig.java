@@ -17,6 +17,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -78,6 +79,11 @@ public class SecurityConfig {
                 // CSRF 配置
                 .csrf(csrf -> csrf.disable()); // 为了方便测试 AJAX，继续禁用 CSRF
 
+
+        http.sessionManagement(cfg->{
+            cfg.maximumSessions(1).maxSessionsPreventsLogin(true);
+        });
+
         return http.build();
     }
 
@@ -104,4 +110,10 @@ public class SecurityConfig {
     public SecurityContextRepository securityContextRepository() {
         return new HttpSessionSecurityContextRepository();
     }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
 }
