@@ -82,6 +82,9 @@ public class SecurityConfig {
             cfg.maximumSessions(1).maxSessionsPreventsLogin(true);
         });
 
+        http.formLogin(cfg->{
+           cfg.loginProcessingUrl("/api/login");
+        });
 
 
         return http.build();
